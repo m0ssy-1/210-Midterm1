@@ -7,13 +7,13 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
 
-//node sttructure represents one element in the doublylinkedlist
+//node structure represents one element in the doublylinkedlist
   struct Node {
-    int data; //values stored in trhis one
+    int data; //values stored in node
     Node *prev; //pointer to the '*previous' node
     Node *next; //pointer to the '*next' node
 
-//constructor initialized the noe with data and previous/next pointers
+//constructor initialized the node with data and previous/next pointers
     Node(int val, Node *p = nullptr, Node *n = nullptr) {
       data = val;
       prev = p;
@@ -38,12 +38,12 @@ public:
     }
 // creates new node
     Node *newNode = new Node(value);
-//if list is empty, new node vecomes head and tail
+//if list is empty, new node becomes head AND tail
     if (!head) {
       head = tail = newNode;
       return;
     }
-//start at front
+//start at front/head
     Node *temp = head;
 //move 'temp' to node at 'position"
     for (int i = 0; i < position && temp; ++i)
@@ -56,29 +56,29 @@ public:
       return;
     }
 
-    //link newNode into list after temp
-    newNode->next = temp->next; //connect newNodes next pointer
-    newNode->prev = temp; //connects newNodes previous pointer
+    //link newNode into list after 'temp'
+    newNode->next = temp->next; //connect newNode's next pointer
+    newNode->prev = temp; //connects newNode's previous pointer
     if (temp->next)
-      temp->next->prev = newNode; //if tempwasnt tail, links next node vack
+      temp->next->prev = newNode; //if temp wasnt tail, links next node back
     else
       tail = newNode; //if temp was tail, update tail pointer
     temp->next = newNode; //limk temp to newNode
   }
 
-  // delets the first node with same 'value'
+  // deletes the first node with same/matching 'value'
   void delete_val(int value) {
     if (!head)
-      return; //nothing to dfelete if list is empty
+      return; //nothing to delete if list is empty
 
     Node *temp = head;
-    //seasch for new node with new value
+    //search for new node with new value
     while (temp && temp->data != value)
       temp = temp->next;
 //value not found
     if (!temp)
       return;
-//adjust previous noed next pointer
+//adjust previous node next pointer
     if (temp->prev)
       temp->prev->next = temp->next;
     else
@@ -144,10 +144,10 @@ public:
   void push_front(int v) {
     Node *newNode = new Node(v);
     if (!head)
-      head = tail = newNode; //if empty, head and rail are newNode
+      head = tail = newNode; //if empty, head and tail are newNode
     else {
       newNode->next = head; //links new node to current head
-      head->prev = newNode; //links current head vack to new node
+      head->prev = newNode; //links current head back to new node
       head = newNode; //update head pointer
     }
   }
@@ -158,9 +158,9 @@ public:
       return;
     }
 
-    Node *temp = head; //hold pointer to deleet
+    Node *temp = head; //hold pointer to delete
     if (head->next) {
-      head = head->next; //moevs head forward
+      head = head->next; //moves head forward
       head->prev = nullptr;
     } else
       head = tail = nullptr; //IF only one node exists
@@ -177,7 +177,7 @@ public:
       tail = tail->prev; // moves tail backward
       tail->next = nullptr;
     } else
-      head = tail = nullptr; //if only one nolde exists
+      head = tail = nullptr; //if only one node exists
     delete temp;
   }
   //destructor/deletes all nodes for memory
