@@ -38,54 +38,73 @@ public:
     }
 // creates new node
     Node *newNode = new Node(value);
-
+//if list is empty, new node vecomes head and tail
     if (!head) {
       head = tail = newNode;
       return;
     }
+//start at front
     Node *temp = head;
+//move 'temp' to node at 'position"
     for (int i = 0; i < position && temp; ++i)
       temp = temp->next;
+
+    //if position doesn't exist
     if (!temp) {
       cout << "Position exceeds list size. Node not inserted.\n";
       delete newNode;
       return;
     }
-    newNode->next = temp->next;
-    newNode->prev = temp;
+
+    //link newNode into list after temp
+    newNode->next = temp->next; //connect newNodes next pointer
+    newNode->prev = temp; //connects newNodes previous pointer
     if (temp->next)
-      temp->next->prev = newNode;
+      temp->next->prev = newNode; //if tempwasnt tail, links next node vack
     else
-      tail = newNode;
-    temp->next = newNode;
+      tail = newNode; //if temp was tail, update tail pointer
+    temp->next = newNode; //limk temp to newNode
   }
+
+  // delets the first node with same 'value'
   void delete_val(int value) {
     if (!head)
-      return;
+      return; //nothing to dfelete if list is empty
+
     Node *temp = head;
+    //seasch for new node with new value
     while (temp && temp->data != value)
       temp = temp->next;
+//value not found
     if (!temp)
       return;
+//adjust previous noed next pointer
     if (temp->prev)
       temp->prev->next = temp->next;
     else
-      head = temp->next;
+      head = temp->next; //delets head node
+
+      //adjust next nodes previous pointer
     if (temp->next)
       temp->next->prev = temp->prev;
+    //deleting tail node
     else
       tail = temp->prev;
+    //free memory
     delete temp;
   }
+  //deletes node at given position
   void delete_pos(int pos) {
     if (!head) {
       cout << "List is empty." << endl;
       return;
     }
+    //deletes first node
     if (pos == 1) {
       pop_front();
       return;
     }
+    //outputs
     Node *temp = head;
     for (int i = 1; i < pos; i++) {
       if (!temp) {
@@ -94,6 +113,7 @@ public:
       } else
         temp = temp->next;
     }
+    //deleting last element
     if (!temp) {
       cout << "Position doesn't exist." << endl;
       return;
@@ -102,6 +122,7 @@ public:
       pop_back();
       return;
     }
+    
     Node *tempPrev = temp->prev;
     tempPrev->next = temp->next;
     temp->next->prev = tempPrev;
