@@ -214,7 +214,20 @@ public:
     }
     cout << endl;
   }
-};
+}
+void every_other_element() {
+  *Node current = head;
+  if (!current) {
+    cout << "sometihng" << endl;
+    return;
+  }
+  while (current) {
+    if (index % 2 ==0)
+    cout << current->data << "something";
+  current = 
+  }
+
+}
 int main() {
   cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
  return 0;
