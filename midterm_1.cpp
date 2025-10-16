@@ -214,21 +214,46 @@ public:
     }
     cout << endl;
   }
-}
+
+  //prints every othe element (1st, 3rd, 5th...)
 void every_other_element() {
-  *Node current = head;
+  Node* current = head;
+  int index = 0; //keeps track of position
   if (!current) {
-    cout << "sometihng" << endl;
+    cout << "List is empty" << endl;
     return;
   }
   while (current) {
-    if (index % 2 ==0)
-    cout << current->data << "something";
-  current = 
+    if (index % 2 ==0) //print only even nodes
+    cout << current->data << " ";
+  current = current->next; //moves to next node
+  index++;
   }
-
+cout << endl;
 }
+};
+
 int main() {
-  cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
+  //creates doublylinkedlist object
+  DoublyLinkedList list;
+
+  // pushes a few numbbers to the list
+  list.push_back(10);
+  list.push_back(20);
+  list.push_back(30);
+  list.push_back(40);
+  list.push_back(50);
+
+  cout << "Full list (head to tail): ";
+  list.print();
+
+  cout << "Every other element: ";
+  list.every_other_element();
+  
+  cout << "Reverse list (tail to head): ";
+  list.print_reverse();
+
+  cout << (MIN_NR + MIN_LS + MAX_NR + MAX_LS) << endl;
+
  return 0;
 }
